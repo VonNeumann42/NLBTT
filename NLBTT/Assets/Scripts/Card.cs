@@ -1,47 +1,48 @@
-using System.Collections.Generic;
 using UnityEngine;
-using static Cardtypes;
 
+[RequireComponent(typeof(Collider))]
 public class Card : MonoBehaviour
 {
-    [SerializeField] public string name;
-    [SerializeField] public CardTypes type;
+    public Cardtypes.CardTypes type;
+    private Renderer rend;
+    private Color baseColor;
+    private bool isHighlighted = false;
 
-    // Statische Listen für verschiedene Kartentypen
-    public static List<Card> eventCards = new List<Card>();
-    public static List<Card> terrainCards = new List<Card>();
-    public static List<Card> itemCards = new List<Card>();
-
-    // Konstruktor
-    public Card(string Name, CardTypes Type)
+    void Start()
     {
-        name = Name;
-        type = Type;
-
-        // Karte automatisch einsortieren
-        AddToList(this);
+        rend = GetComponent<Renderer>();
+        if (rend != null)
+            baseColor = rend.material.color;
     }
 
-    // Methode, die Karten je nach Typ in die passende Liste legt
-    public static void AddToList(Card card)
+    public void SetHighlight(bool state)
     {
-        switch (card.type)
-        {
-            case CardTypes.Event:
-                eventCards.Add(card);
-                break;
+        isHighlighted = state;
+        if (rend == null) return;
+        rend.material.color = state ? Color.yellow : baseColor;
+    }
 
-            case CardTypes.Terrain:
-                terrainCards.Add(card);
-                break;
+    void OnMouseEnter()
+    {
+        Player player = FindObjectOfType<Player>();
+        if (player == null) return;
 
-            case CardTypes.Item:
-                itemCards.Add(card);
-                break;
+        if (player.IsAdjacent(this))
+            SetHighlight(true);
+    }
 
-            default:
-                Debug.LogWarning($"Unbekannter Kartentyp: {card.type}");
-                break;
-        }
+    void OnMouseExit()
+    {
+        if (!isHighlighted)
+            SetHighlight(false);
+    }
+
+    void OnMouseDown()
+    {
+        Player player = FindObjectOfType<Player>();
+        if (player == null) return;
+
+        if (player.IsAdjacent(this))
+            player.MoveTo(this);
     }
 }

@@ -1,16 +1,10 @@
 using UnityEngine;
+using static Card;
 
 public class Items : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void ItemRule(Card card)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -4,7 +4,7 @@ using static Player;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveDistance = 1f; // Schrittweite pro Bewegung
+    /*public float moveDistance = 1f; // Schrittweite pro Bewegung
     private bool isChoosingDirection = false;
     private Vector3 targetPosition;
 
@@ -113,5 +113,61 @@ public class PlayerMovement : MonoBehaviour
     void StartAction()
     {
         Debug.Log("Aktion gestartet");
+    }*/
+
+
+    private Player player;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
+
+    void Update()
+    {
+        HandleKeyboardInput();
+        HandleControllerInput();
+    }
+
+    void HandleKeyboardInput()
+    {
+        if (Keyboard.current.wKey.wasPressedThisFrame)
+            TryMove(Vector3.forward);
+        if (Keyboard.current.sKey.wasPressedThisFrame)
+            TryMove(Vector3.back);
+        if (Keyboard.current.aKey.wasPressedThisFrame)
+            TryMove(Vector3.left);
+        if (Keyboard.current.dKey.wasPressedThisFrame)
+            TryMove(Vector3.right);
+    }
+
+    void HandleControllerInput()
+    {
+        Gamepad pad = Gamepad.current;
+        if (pad == null) return;
+
+        if (pad.dpad.up.wasPressedThisFrame) TryMove(Vector3.forward);
+        if (pad.dpad.down.wasPressedThisFrame) TryMove(Vector3.back);
+        if (pad.dpad.left.wasPressedThisFrame) TryMove(Vector3.left);
+        if (pad.dpad.right.wasPressedThisFrame) TryMove(Vector3.right);
+    }
+
+    void TryMove(Vector3 direction)
+    {
+        if (player == null || player.currentCard == null) return;
+
+        Vector3 newPos = player.currentCard.transform.position + direction * 2f;
+        foreach (Card c in FindObjectsOfType<Card>())
+        {
+            if (Vector3.Distance(c.transform.position, newPos) < 0.1f)
+            {
+                player.MoveTo(c);
+                return;
+            }
+        }
+    }
+
+
 }

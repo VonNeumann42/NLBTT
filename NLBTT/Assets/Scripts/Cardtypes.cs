@@ -6,6 +6,9 @@ public class Cardtypes : MonoBehaviour
     {
         Event,
         Terrain,
-        Item
+        Item,
+        Start,
+        Altar,
+        Blank
     }
 }
