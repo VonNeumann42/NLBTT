@@ -260,10 +260,12 @@ m_ResolvedPackages:
     - 2.9.3
     - 2.10.0
     - 2.10.1
+    - 2.10.2
     compatible:
     - 2.10.0
     - 2.10.1
-    recommended: 2.10.1
+    - 2.10.2
+    recommended: 2.10.2
     deprecated: []
   dependencies: []
   resolvedDependencies: []
@@ -669,9 +671,11 @@ m_ResolvedPackages:
     - 1.14.1
     - 1.14.2
     - 1.15.0
+    - 1.16.0
     compatible:
     - 1.14.2
     - 1.15.0
+    - 1.16.0
     recommended: 1.14.2
     deprecated: []
   dependencies:

@@ -438,6 +438,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.2.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.2.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/Altar (Win Condition).cs"
+"Assets/Scripts/Arrows.cs"
 "Assets/Scripts/Card.cs"
 "Assets/Scripts/CardGenerator.cs"
 "Assets/Scripts/Cardtypes.cs"
