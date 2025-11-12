@@ -77,6 +77,11 @@ public class Player2 : MonoBehaviour
 
         // Bewegung konsumiert Essen
         food -= 1;
+        
+        // subtractFood(5);
+        
+        // 
+        
         turnNumber++;
         
         // Hunger-Schaden
